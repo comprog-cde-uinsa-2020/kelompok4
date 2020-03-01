@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Week 4</title>
+</head>
+
+<body>
+    <h3>Daftar Pengunjung</h3>
+    <br>Nama Pengunjung</br>
+    <input type="text" id="pengunjung"></input>
+    <br>Nominal Harga Belanja</br>
+    <input type="number" id="kas"></input>
+    <br></br>
+    <input type="button" onclick="pengunjungBayar()" name="simpan" value="submit"></input>
+
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+
+
+</body>
+<script>
+    function pengunjungBayar() {
+        document.getElementById('demo1').innerHTML = "Kas Ramayana = " + this.ramayana1.kas;
+        var pengunjung = document.getElementById("pengunjung").value;
+        var kas = document.getElementById("kas").value;
+
+        this.ramayana1.pengunjungKeluar(pengunjung, kas);
+        document.getElementById('demo2').innerHTML = "Kas Ramayana setelah dikunjungi " + pengunjung + " menjadi = " + this.ramayana1.kas;
+    }
+
+    function Ramayana(manager, cabang, pengunjung, kas) {
+        this.manager = manager;
+        this.cabang = cabang;
+        this.pengunjung = pengunjung;
+        this.kas = kas;
+
+        this.pengunjungDatang = function (namaPengunjung) {
+            this.pengunjung.push(namaPengunjung);
+            return this.pengunjung
+        }
+
+        this.pengunjungKeluar = function (namaPengunjung, bayar) {
+            if (this.pengunjung.length === 0) {
+                alert('ramayana masih tutup!');
+                return false;
+            }
+
+            for (var i = 0; i < this.pengunjung.length; i++) {
+                if (this.pengunjung[i] == namaPengunjung) {
+                    this.pengunjung[i] = undefined;
+                    this.kas += parseInt(bayar);
+                    return this.pengunjung;
+                }
+            }
+        }
+    }
+
+    var ramayana1 = new Ramayana('Suci', 'Sidoarjo', ["Lely", "Khofifah"], 0);
+</script>
+
+</html>
